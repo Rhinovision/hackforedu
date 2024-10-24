@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            color: white;
+            background-color: #1a1a2e;
+        }
+        .sidebar {
+            width: 200px;
+            background-color: #800080;
+            padding: 20px;
+        }
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+        .chart-container {
+            background-color: #16213e;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .stat-card {
+            background-color: #16213e;
+            border-radius: 8px;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h1>CT CREATIVE TM</h1>
+        <nav>
+            <ul>
+                <li>Overview</li>
+                <li>Users</li>
+                <li>Notifications</li>
+            </ul>
+        </nav>
+    </div>
+    <div class="main-content">
+        <h2>Performance</h2>
+        <div class="chart-container">
+            <canvas id="performanceChart"></canvas>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Daily payments</h3>
+                <p>763,215</p>
+            </div>
+            <div class="stat-card">
+                <h3>Daily Sales</h3>
+                <p>3,500€</p>
+            </div>
+            <div class="stat-card">
+                <h3>Completed Sales</h3>
+                <p>12,100K</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('performanceChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+                datasets: [{
+                    label: 'Performance',
+                    data: [30, 20, 35, 25, 32, 18, 23, 19, 32, 37, 36, 31],
+                    borderColor: 'rgb(255, 99, 132)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kárdex de Estudiante - Universidad de Guanajuato</title>
+    <style>
+       body {
+            background: url('TESCI.png') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            justify-content: space-between; /* Espacio entre los dos cuadros */
+            align-items: flex-start; /* Alinea los cuadros desde la parte superior */
+        }
+
+        .container {
+           display: flex;
+           justify-content: space-between;
+           width: 90%;
+        }
+
+        .login-container {
+           background-color: rgba(0, 0, 50, 0.7);
+           width: 350px;
+           padding: 20px;
+           border-radius: 10px;
+           margin: 100px 0 0 50px;
+           text-align: center;
+           color: white;
+        }
+
+        .small-container {
+           background-color: rgba(128, 128, 128, 0.8);
+           width: 200px; /* Cuadro más pequeño */
+           padding: 15px;
+           border-radius: 10px;
+           margin: 200px 50px 0 0; /* Espaciado desde la derecha */
+           color: white;
+           text-align: center;
+        }
+
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: orange;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: darkorange;
+        }
+        .links a {
+            display: block;
+            margin-top: 15px;
+            color: lightblue;
+            text-decoration: none;
+        }
+        .links a:hover {
+            text-decoration: underline;
+        }
+        .logo {
+            margin-bottom: 20px;
+        }
+        .logo img {
+            width: 100px;
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #34495e;
+            color: #fff;
+            margin: 0 5px;
+            border-radius: 5px;
+        }
+        .tab.active {
+            background-color: #e67e22;
+        }
+        #registerForm, #loginForm {
+            display: none;
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <img src="LOGO.png">
+        </div>
+        
+        <div class="tabs">
+            <div class="tab active" onclick="showForm('login')">INICIAR SESIÓN</div>
+            <div class="tab" onclick="showForm('register')">REGISTRARSE</div>
+        </div>
+
+        <div class="form-container">
+            <!-- Formulario de Iniciar Sesión -->
+            <div id="loginForm" class="form" style="display: block;">
+                <input type="text" placeholder="CORREO" required>
+                <input type="password" placeholder="CONTRASEÑA" required>
+                <button type="submit">Acceder</button>
+            </div>
+
+            <!-- Formulario de Registro -->
+            <div id="registerForm" class="form">
+                <input type="text" placeholder="NOMBRE DE USUARIO" required>
+                <input type="text" placeholder="APELLIDO MATERNO" required>
+                <input type="text" placeholder="APELLIDO PATERNO" required>
+                <input type="email" placeholder="NUMERO DE CONTROL" required>
+                <input type="email" placeholder="CORREO" required>
+                <input type="password" placeholder="CONTRASEÑA" required>
+                <button type="submit">Registrarse</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cuadro del lado derecho -->
+        <div class="small-container">
+            <div class="logo">
+            <h1>RINOHACKERS</h1> 
+            <img src="LOGO2.png">
+    </div>
+
+    <script>
+        function showForm(formType) {
+            const registerForm = document.getElementById('registerForm');
+            const loginForm = document.getElementById('loginForm');
+            const tabs = document.querySelectorAll('.tab');
+
+            if (formType === 'register') {
+                registerForm.style.display = 'block';
+                loginForm.style.display = 'none';
+                tabs[1].classList.add('active');
+                tabs[0].classList.remove('active');
+            } else {
+                registerForm.style.display = 'none';
+                loginForm.style.display = 'block';
+                tabs[0].classList.add('active');
+                tabs[1].classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>
