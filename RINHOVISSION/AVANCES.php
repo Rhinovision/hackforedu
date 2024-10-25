@@ -98,17 +98,92 @@ session_start();
 
                 <button id="update-chart">Actualizar Gráfico</button>
             </div>
+            <div class="chart-container">
+            <canvas id="progressChart"></canvas>
+        </div>
 
             <!-- Contenedor para el gráfico -->
             <div class="chart-container">
                 <canvas id="progress-chart"></canvas>
             </div>
+            
         </div>
         <?php
     } else {
         echo "<p>Acceso denegado. Inicia sesión como alumno.</p>";
     }
     ?>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script>
+        // Configuración de la gráfica (igual que antes)
+        const progressData = {
+            labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+            datasets: [{
+                label: 'Progreso General',
+                data: [30, 45, 55, 65, 75, 85],
+                borderColor: '#FFA500',
+                backgroundColor: 'rgba(255, 165, 0, 0.2)',
+                tension: 0.4,
+                pointRadius: 6,
+                pointHoverRadius: 8,
+                pointBackgroundColor: '#FFA500'
+            }]
+        };
+
+        const ctx = document.getElementById('progressChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: progressData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        ticks: {
+                            color: '#fff'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        ticks: {
+                            color: '#fff'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#fff'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Animación inicial de las medallas
+        document.addEventListener('DOMContentLoaded', () => {
+            const medals = document.querySelectorAll('.medal-fill');
+            medals.forEach(medal => {
+                const height = medal.style.height;
+                medal.style.height = '0';
+                setTimeout(() => {
+                    medal.style.height = height;
+                }, 300);
+            });
+        });
+
+        function navigateTo(page) {
+            // Implementar navegación
+        }
+    </script>
 
     <script>
         // Obtener referencia al canvas y crear gráfico inicial
