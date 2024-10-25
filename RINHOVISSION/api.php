@@ -1,69 +1,86 @@
 <?php
 header('Content-Type: application/json');
 
+// Connect to the 'dashboard_estudiantil' database
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "proyect_anti_antidesercion";
+$dbname = "dashboard_estudiantil";
 
-// Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Verificar conexión
+// Check connection
 if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
 
+// Get the student identifier from the request
+$num_control = $_GET['num_control'];
 
-$query = "SELECT * FROM d_personales";
+// Fetch data from `usuarios` for a specific student
+$query = "SELECT * FROM usuarios WHERE num_control = '$num_control'";
 $result = $conn->query($query);
+$usuario = $result->fetch_assoc();
 
-$personales = array();
-while ($row = $result->fetch_assoc()) {
-    $personales[] = $row;
-}
-
-$query = "SELECT * FROM d_emocional";
+// Fetch data from `materias`
+$query = "SELECT * FROM materias";
 $result = $conn->query($query);
-
-$emocionales = array();
+$materias = array();
 while ($row = $result->fetch_assoc()) {
-    $emocionales[] = $row;
+    $materias[] = $row;
 }
 
-$query = "SELECT * FROM d_economico";
+// Fetch data from `inscripciones`
+$query = "SELECT * FROM inscripciones WHERE num_control = '$num_control'";
 $result = $conn->query($query);
-
-$economicos = array();
+$inscripciones = array();
 while ($row = $result->fetch_assoc()) {
-    $economicos[] = $row;
+    $inscripciones[] = $row;
 }
 
-$query = "SELECT * FROM d_social";
+// Fetch data from `tareas`
+$query = "SELECT * FROM tareas WHERE num_control = '$num_control'";
 $result = $conn->query($query);
-
-$social = array();
+$tareas = array();
 while ($row = $result->fetch_assoc()) {
-    $social[] = $row;
+    $tareas[] = $row;
 }
 
-$query = "SELECT * FROM d_institucional";
+// Fetch data from `eventos`
+$query = "SELECT * FROM eventos WHERE num_control = '$num_control'";
 $result = $conn->query($query);
-
-$intitucionales = array();
+$eventos = array();
 while ($row = $result->fetch_assoc()) {
-    $intitucionales[] = $row;
+    $eventos[] = $row;
 }
 
+// Fetch data from `calificaciones_historicas`
+$query = "SELECT * FROM calificaciones_historicas WHERE num_control = '$num_control'";
+$result = $conn->query($query);
+$calificaciones = array();
+while ($row = $result->fetch_assoc()) {
+    $calificaciones[] = $row;
+}
+
+// Calculate average grade for a specific student
+$query = "SELECT AVG(calificacion) AS promedio FROM calificaciones_historicas WHERE num_control = '$num_control'";
+$result = $conn->query($query);
+$promedio = $result->fetch_assoc();
+
+// Prepare the response
 $response = array(
-    'personales' => $personales,
-    'emocional'=>$emocionales,
-    'economico'=>$economicos,
-    'social' => $social,
-    'institucional' => $intitucionales,
+    'usuario' => $usuario,
+    'materias' => $materias,
+    'inscripciones' => $inscripciones,
+    'tareas' => $tareas,
+    'eventos' => $eventos,
+    'calificaciones' => $calificaciones,
+    'promedio' => $promedio['promedio']  // Include calculated average
 );
 
+// Return the JSON-encoded response
 echo json_encode($response);
 
+// Close connection
 $conn->close();
 ?>
