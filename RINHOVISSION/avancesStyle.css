@@ -284,3 +284,42 @@ body {
     background: #FFD700;
     clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 }
+.chart-container {
+    background-color: #444;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 50px;
+    height: 400px;
+}
+
+.filter-options {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.filter-options label {
+    margin-right: 10px;
+    color: #FFA500;
+}
+
+.filter-options select {
+    padding: 10px;
+    background-color: #555;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.filter-options button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    background-color: #FFA500;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.filter-options button:hover {
+    background-color: #FFB732;
+}
